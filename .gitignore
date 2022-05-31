@@ -11,8 +11,8 @@ node_modules
 # production
 /build
 
-.jsx
-/firebaseconfig/*
+#jsx
+/firebaseconfig.jsx/*
 # misc
 .DS_Store
 .env.local
@@ -23,6 +23,7 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/Config/firebaseconfig.jsx
 src/Config/firebaseconfig.jsx
 src/Config/firebaseconfig.jsx
 src/Config/firebaseconfig.jsx
