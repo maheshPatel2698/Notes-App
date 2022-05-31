@@ -1,0 +1,39 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+#card {
+  margin: 1rem;
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.85s;
+  border-radius: 20px;
+  box-shadow: 0 0 1rem rgb(36, 36, 36);
+  cursor: pointer;
+}
+.card-title {
+  text-align: center;
+}
+.card-text {
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.card-img {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+}
+.i {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+}
