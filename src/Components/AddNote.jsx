@@ -27,23 +27,31 @@ const AddNote = () => {
 
     // image picker
     const imagePicker = async (e) => {
-        const file = e.target.files[0]
-        var metadata = {
-            file: file.name
+        try {
+            const file = e.target.files[0]
+            var metadata = {
+                file: file.name
+            }
+            var resizedImage = await readAndCompressImage(file, imageConfig)
+            firebase.storage().ref('images/' + file.name)
+                .put(resizedImage, metadata)
+            firebase.storage().ref(`images/${file.name}`)
+                .getDownloadURL()
+                .then(res => {
+                    toast.success("image Uploaded", { autoClose: 500, position: "top-right", closeButton: false })
+                    setDownloadUrl(res)
+                })
+                .catch(err => console.log(err))
+        } catch (error) {
+            console.log(error)
+            toast.error("Oops something went wrong",
+                {
+                    autoClose: 500,
+                    closeButton: false,
+                    closeOnClick: true,
+                    position: "top-right"
+                })
         }
-        var resizedImage = await readAndCompressImage(file, imageConfig)
-        firebase.storage().ref('images/' + file.name)
-            .put(resizedImage, metadata)
-        firebase.storage().ref(`images/${file.name}`)
-            .getDownloadURL()
-            .then(res => {
-                toast.success("image Uploaded", { autoClose: 500, position: "top-right", closeButton: false })
-                setDownloadUrl(res)
-
-            })
-            .catch(err => console.log(err))
-
-
     }
 
     // creting notes under ref of user email   

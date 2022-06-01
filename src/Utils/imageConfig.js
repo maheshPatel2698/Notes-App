@@ -1,6 +1,6 @@
 const imageConfig = {
     qualty: 0.5,
-    maxWidth: 500,
+    maxWidth: 300,
     maxHeight: 300,
     autoRotate: true,
     debug: true
