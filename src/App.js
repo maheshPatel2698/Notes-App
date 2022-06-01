@@ -125,7 +125,6 @@ const App = () => {
         position: "top-right"
       })
   }
-
   const handleUsercard = () => {
     const element = document.getElementById('userCard')
     element.classList.toggle('userCardTransition')
@@ -133,8 +132,6 @@ const App = () => {
 
   const getAllNotes = () => {
     try {
-
-
       firebase.database().ref(dbref).child('Notes')
         .on('value', snapshot => {
           dispatch({

@@ -5,6 +5,7 @@ import { CgNotes } from "react-icons/cg"
 import { BiLogIn, BiLogOut } from "react-icons/bi"
 import { FaRegLightbulb, FaPlusCircle } from "react-icons/fa"
 import { TiTick } from "react-icons/ti"
+import { BsArrowDownCircleFill } from "react-icons/bs"
 
 
 import img1 from "../Reducer/Images/img.jpg"
@@ -15,24 +16,33 @@ const NavBar = () => {
 
     const { handleLogin, user, handleLogOut, handleUsercard, handleDarkMode } = useContext(NotesContext)
 
+    const handleNavbar = () => {
+        console.log("effect activated")
+        const midNav = document.getElementById('mid')
+        midNav.classList.toggle('navEffect')
+        const rightNav = document.getElementById('right')
+        rightNav.classList.toggle('navEffect')
+        const arrow = document.getElementById('adc')
+        arrow.classList.toggle('adcEffect')
+    }
     return (
         <div id='nav' className='nav-bar'>
             <div className="left">
                 <Link to="/">
                     Notes App
                 </Link>
+                <BsArrowDownCircleFill id='adc' onClick={handleNavbar} size={25} />
             </div>
-            <div className="mid">
+            <div id='mid' className="mid">
                 <Link to="/notes">
 
-                    <CgNotes size={35} />
+                    <CgNotes id='cn' size={35} />
                 </Link>
                 <Link to="/addnote">
-
-                    <FaPlusCircle size={35} />
+                    <FaPlusCircle id='circle' size={35} />
                 </Link>
             </div>
-            <div className="right">
+            <div id='right' className="right">
                 <div className="imgclass">
                     <img onClick={handleUsercard} className='img' src={user?.email ? user?.photo : img1} alt="profile" />
                 </div>
