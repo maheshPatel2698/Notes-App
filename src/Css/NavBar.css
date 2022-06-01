@@ -8,6 +8,7 @@
   grid-template-columns: 0.5fr 1fr 0.5fr;
   box-shadow: 0 0 1rem rgb(36, 36, 36);
   transition: all 0.85s;
+  height: auto;
 }
 .left a {
   text-decoration: none;
@@ -176,4 +177,18 @@
 .adcEffect {
   transition: all 0.85s;
   transform: rotateX(180deg);
+}
+@media (max-width: 450px) {
+  .mid {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .right {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .bulb {
+    position: relative;
+    left: 8px;
+  }
 }

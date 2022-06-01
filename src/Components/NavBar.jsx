@@ -62,8 +62,8 @@ const NavBar = () => {
                         {user?.email ? <BiLogOut size={30} onClick={handleLogOut} /> : ""}
                     </div>
                 </div>
-                <div onClick={handleDarkMode}>
-                    <FaRegLightbulb size={33} />
+                <div className='bulb' >
+                    <FaRegLightbulb onClick={handleDarkMode} size={33} />
                 </div>
             </div>
         </div>
