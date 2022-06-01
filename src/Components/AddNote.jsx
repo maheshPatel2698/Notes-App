@@ -26,7 +26,7 @@ const AddNote = () => {
     const [downloadUrl, setDownloadUrl] = useState("")
 
     // image picker
-    const imagePicker = (e) => {
+    const imagePicker = async (e) => {
         const file = e.target.files[0]
         var metadata = {
             file: file.name
@@ -39,6 +39,7 @@ const AddNote = () => {
             .then(res => {
                 toast.success("image Uploaded", { autoClose: 500, position: "top-right", closeButton: false })
                 setDownloadUrl(res)
+
             })
             .catch(err => console.log(err))
 
