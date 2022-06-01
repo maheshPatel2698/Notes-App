@@ -5,13 +5,13 @@ import "../Css/AddNote.css"
 import firebase from "firebase/compat/app"
 import "firebase/compat/database"
 import "firebase/compat/storage"
-
+import imageConfig from '../Utils/imageConfig'
 import NotesCotext from '../Context/NotesContext'
 import { v4 } from 'uuid'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import { UPDATE_NOTE } from '../Reducer/action.type'
-
+import { readAndCompressImage } from "browser-image-resizer/src/index"
 const AddNote = () => {
 
     // getting ref
@@ -27,21 +27,21 @@ const AddNote = () => {
 
     // image picker
     const imagePicker = (e) => {
-
-        let image = e.target.files[0]
-        firebase.storage().ref('images/' + v4()).put(image)
-            .on("state_changed", toast.success("Image Uploded",
-                {
-                    autoClose: 500, position: "top-right",
-                    closeButton: false
-                }
-            )
-            );
-        firebase.storage().ref(`/images/${image.name}`).getDownloadURL().then(img => {
-            setDownloadUrl(img)
-
-        })
+        const file = e.target.files[0]
+        var metadata = {
+            file: file.name
+        }
+        var resizedImage = await readAndCompressImage(file, imageConfig)
+        firebase.storage().ref('images/' + file.name)
+            .put(resizedImage, metadata)
+        firebase.storage().ref(`images/${file.name}`)
+            .getDownloadURL()
+            .then(res => {
+                toast.success("image Uploaded", { autoClose: 500, position: "top-right", closeButton: false })
+                setDownloadUrl(res)
+            })
             .catch(err => console.log(err))
+
 
     }
 
