@@ -10,6 +10,7 @@ import Home from './Components/Home'
 import NavBar from './Components/NavBar'
 import AddNote from './Components/AddNote'
 
+
 // importing react toast
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.min.css"
@@ -199,6 +200,7 @@ const App = () => {
       }}
     >
       <NavBar />
+
       <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />

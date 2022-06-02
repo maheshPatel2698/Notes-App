@@ -25,27 +25,6 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.85s;
-}
-
-.mid {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.85s;
-}
-.right {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.85s;
-}
 
 .userCard {
   width: 18rem;
@@ -67,7 +46,21 @@
   align-items: center;
   border-bottom: 1px solid black;
 }
-
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 #adc {
   display: none;
 }
