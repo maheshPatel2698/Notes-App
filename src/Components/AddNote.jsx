@@ -16,7 +16,7 @@ const AddNote = () => {
 
     // getting ref
     const { dbref, user, state, isUpdate, setIsUpdate, dispatch, navigate } = useContext(NotesCotext)
-    const { NoteToUpdateKey, NoteToUpdate } = state
+    const { NoteToUpdateKey, NoteToUpdate, ImageToUpdateKey } = state
 
     // creting state for input
     const [title, setTitle] = useState("")
@@ -24,6 +24,7 @@ const AddNote = () => {
     const [tag, setTag] = useState("")
     const [date, setDate] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
+    const [imageName, setImageName] = useState("")
 
     // image picker
     const imagePicker = async (e) => {
@@ -33,15 +34,43 @@ const AddNote = () => {
                 file: file.name
             }
             var resizedImage = await readAndCompressImage(file, imageConfig)
-            firebase.storage().ref('images/' + file.name)
-                .put(resizedImage, metadata)
-            firebase.storage().ref(`images/${file.name}`)
-                .getDownloadURL()
-                .then(res => {
-                    toast.success("image Uploaded", { autoClose: 500, position: "top-right", closeButton: false })
-                    setDownloadUrl(res)
-                })
-                .catch(err => console.log(err))
+
+            if (isUpdate) {
+                const prevRef = firebase.storage().ref('images/' + ImageToUpdateKey)
+                await prevRef.put(resizedImage, metadata)
+
+                await prevRef.getDownloadURL()
+                    .then((res) => {
+                        setDownloadUrl(res)
+
+                        toast.success("Image Uploaded",
+                            { autoClose: 500, position: "top-right", closeButton: false }
+                        )
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                const imgName = prevRef.name
+                setImageName(imgName)
+                console.log(imgName)
+            }
+            else {
+
+                const storageRef = firebase.storage().ref('images/' + v4())
+                await storageRef.put(resizedImage, metadata)
+                await storageRef.getDownloadURL()
+                    .then((res) => {
+                        setDownloadUrl(res)
+                        toast.success("Image Uploaded",
+                            { autoClose: 500, position: "top-right", closeButton: false }
+                        )
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                const imgName = storageRef.name
+                setImageName(imgName)
+            }
         } catch (error) {
             console.log(error)
             toast.error("Oops something went wrong",
@@ -71,7 +100,8 @@ const AddNote = () => {
                     desc,
                     tag,
                     date,
-                    downloadUrl
+                    downloadUrl,
+                    imageName
 
                 })
             toast.success("Notes Added",
@@ -97,6 +127,7 @@ const AddNote = () => {
             setTag(NoteToUpdate.tag)
             setDate(NoteToUpdate.date)
             setDownloadUrl(NoteToUpdate.downloadUrl)
+            setImageName(NoteToUpdate.imageName)
         }
     }, [NoteToUpdate])
 
@@ -108,7 +139,8 @@ const AddNote = () => {
                 desc,
                 tag,
                 date,
-                downloadUrl
+                downloadUrl,
+                imageName
             })
 
         navigate('/notes')

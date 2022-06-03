@@ -1,4 +1,4 @@
-import { SET_NOTES, UPDATE_NOTE, VIEW_NOTE } from "./action.type"
+import { SET_NOTES, UPDATE_NOTE, VIEW_NOTE, UPDATE_IMAGE } from "./action.type"
 
 
 const NotesReducer = (state, action) => {
@@ -20,6 +20,12 @@ const NotesReducer = (state, action) => {
                 ...state,
                 NoteToUpdate: action.payload,
                 NoteToUpdateKey: action.key
+            }
+        case UPDATE_IMAGE:
+            return {
+                ...state,
+                ImageToUpdateKey: action.key
+
             }
         default:
             return state

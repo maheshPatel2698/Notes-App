@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import "../Css/Note.css"
 import { AiFillTag, AiFillDelete } from "react-icons/ai"
 import { FaPen } from "react-icons/fa"
-import { UPDATE_NOTE, VIEW_NOTE } from "../Reducer/action.type"
+import { UPDATE_IMAGE, UPDATE_NOTE, VIEW_NOTE } from "../Reducer/action.type"
 import { useNavigate } from "react-router-dom"
 import NotesContext from "../Context/NotesContext"
 import firebase from "firebase/compat/app"
@@ -32,22 +32,30 @@ const Note = ({ Notekey, data }) => {
             })
     }
 
-    const handleUpdate = (data, Notekey) => {
+    const handleUpdate = (data, Notekey, imgName) => {
         dispatch({
             type: UPDATE_NOTE,
             payload: data,
             key: Notekey
         })
+        dispatch({
+            type: UPDATE_IMAGE,
+            key: imgName
+        })
         setIsUpdate(true)
         navigate('/addnote')
 
     }
-    const handleNaigate = (data) => {
+    const handleNaigate = (data, imgName) => {
         dispatch({
             type: VIEW_NOTE,
             payload: data
         })
-
+        dispatch({
+            type: UPDATE_IMAGE,
+            key: imgName
+        })
+        console.log(imgName)
         navigate('/note')
     }
 
@@ -65,8 +73,8 @@ const Note = ({ Notekey, data }) => {
                     <span>Add On: {data?.date}</span>
                     <button onClick={() => handleNaigate(data)} className='btn btn-primary m-2'>Read Full Note</button>
                     <div className="buttons">
-                        <AiFillDelete onClick={() => handleDelete(Notekey)} size={28} color='red' />
-                        <FaPen onClick={() => handleUpdate(data, Notekey)} size={24} />
+                        <AiFillDelete onClick={() => handleDelete(Notekey, data?.imageName)} size={28} color='red' />
+                        <FaPen onClick={() => handleUpdate(data, Notekey, data?.imageName)} size={24} />
 
                     </div>
                 </div>

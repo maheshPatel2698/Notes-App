@@ -46,6 +46,7 @@ const App = () => {
     note: {},
     NoteToUpdate: null,
     NoteToUpdateKey: null,
+    ImageToUpdateKey: null
   }
 
   // Method to check prev user
