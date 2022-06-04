@@ -35,7 +35,6 @@ const NavBar = () => {
             </div>
             <div id='mid' className="mid">
                 <Link to="/notes">
-
                     <CgNotes id='cn' size={35} />
                 </Link>
                 <Link to="/addnote">

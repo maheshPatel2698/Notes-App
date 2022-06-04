@@ -110,13 +110,14 @@
     flex-wrap: wrap;
   }
   .mid {
-    flex-direction: column;
-    flex-wrap: wrap;
+    width: 100%;
+    align-items: flex-start;
   }
   .right {
-    flex-direction: column;
-    flex-wrap: wrap;
+    width: 100%;
+    align-items: flex-start;
   }
+
   #cn {
     margin: 0.25rem;
   }
@@ -172,14 +173,6 @@
   transform: rotateX(180deg);
 }
 @media (max-width: 450px) {
-  .mid {
-    width: 100%;
-    align-items: flex-start;
-  }
-  .right {
-    width: 100%;
-    align-items: flex-start;
-  }
   .bulb {
     position: relative;
     left: 8px;

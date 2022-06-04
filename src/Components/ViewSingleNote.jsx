@@ -3,7 +3,7 @@ import "../Css/ViewSingleNote.css"
 import NotesContext from '../Context/NotesContext'
 import { AiFillTag } from "react-icons/ai"
 const ViewSinglenote = () => {
-    const { state } = useContext(NotesContext)
+    const { state, navigate } = useContext(NotesContext)
     const { note } = state
 
     return (
@@ -15,8 +15,8 @@ const ViewSinglenote = () => {
             <h3><AiFillTag size={28} />  {note?.tag}</h3>
             <div className="para">
                 <p className='text-center'>{note.desc}</p>
-
             </div>
+            <button onClick={() => navigate('/notes')} className="btn btn-primary m-2">Back To Notes</button>
         </div>
     )
 }

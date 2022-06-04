@@ -10,8 +10,9 @@ import NotesCotext from '../Context/NotesContext'
 import { v4 } from 'uuid'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
-import { UPDATE_NOTE } from '../Reducer/action.type'
+import { UPDATE_IMAGE, UPDATE_NOTE } from '../Reducer/action.type'
 import { readAndCompressImage } from "browser-image-resizer/src/index"
+import Spinner from "react-bootstrap/Spinner"
 const AddNote = () => {
 
     // getting ref
@@ -25,24 +26,23 @@ const AddNote = () => {
     const [date, setDate] = useState("")
     const [downloadUrl, setDownloadUrl] = useState("")
     const [imageName, setImageName] = useState("")
+    const [isUploading, setIsUploading] = useState(false)
 
     // image picker
     const imagePicker = async (e) => {
+        setIsUploading(true)
         try {
             const file = e.target.files[0]
             var metadata = {
                 file: file.name
             }
             var resizedImage = await readAndCompressImage(file, imageConfig)
-
             if (isUpdate) {
-                const prevRef = firebase.storage().ref('images/' + ImageToUpdateKey)
+                const prevRef = firebase.storage().ref(dbref).child('images/' + ImageToUpdateKey)
                 await prevRef.put(resizedImage, metadata)
-
                 await prevRef.getDownloadURL()
                     .then((res) => {
                         setDownloadUrl(res)
-
                         toast.success("Image Uploaded",
                             { autoClose: 500, position: "top-right", closeButton: false }
                         )
@@ -52,17 +52,21 @@ const AddNote = () => {
                     })
                 const imgName = prevRef.name
                 setImageName(imgName)
-                console.log(imgName)
+                setIsUploading(false)
+
             }
             else {
-
-                const storageRef = firebase.storage().ref('images/' + v4())
+                const storageRef = firebase.storage().ref(dbref).child('images/' + v4())
                 await storageRef.put(resizedImage, metadata)
                 await storageRef.getDownloadURL()
                     .then((res) => {
                         setDownloadUrl(res)
                         toast.success("Image Uploaded",
-                            { autoClose: 500, position: "top-right", closeButton: false }
+                            {
+                                autoClose: 500,
+                                position: "top-right",
+                                closeButton: false
+                            }
                         )
                     })
                     .catch((err) => {
@@ -70,6 +74,7 @@ const AddNote = () => {
                     })
                 const imgName = storageRef.name
                 setImageName(imgName)
+                setIsUploading(false)
             }
         } catch (error) {
             console.log(error)
@@ -80,12 +85,13 @@ const AddNote = () => {
                     closeOnClick: true,
                     position: "top-right"
                 })
+            setIsUploading(false)
         }
     }
 
     // creting notes under ref of user email   
     const addNotes = () => {
-        if (!title || !desc || !tag) {
+        if (!title || !desc || !tag || !downloadUrl || !imageName) {
             return toast.warning("Please fill all fields",
                 {
                     autoClose: 800,
@@ -115,7 +121,7 @@ const AddNote = () => {
             setTag("")
             setDate("")
             setDownloadUrl("")
-
+            navigate('/notes')
         } catch (error) {
             toast.error(error, { autoClose: 500, position: "top-right" })
         }
@@ -150,6 +156,10 @@ const AddNote = () => {
             payload: null,
             key: null
         })
+        dispatch({
+            type: UPDATE_IMAGE,
+            key: null
+        })
         toast.success("Note Updated", {
             autoClose: 500,
             position: "top-right",
@@ -169,6 +179,7 @@ const AddNote = () => {
             <div className='main-container'>
                 <form id='form' onSubmit={handleSubmit} >
                     <label htmlFor="image">Upload Image Here</label>
+                    {isUploading ? <Spinner className="m-2" animation="border" variant="primary" /> : null}
                     <div>
                         <img className='imgclass' src={downloadUrl} alt="" />
                     </div>

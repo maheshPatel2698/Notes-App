@@ -3,6 +3,6 @@ const imageConfig = {
     maxWidth: 300,
     maxHeight: 300,
     autoRotate: true,
-    debug: true
+    debug: false
 };
 export default imageConfig;

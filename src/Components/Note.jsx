@@ -16,11 +16,11 @@ const Note = ({ Notekey, data }) => {
     const { dbref, dispatch, setIsUpdate } = useContext(NotesContext)
 
     // creating delete method
-    const handleDelete = (key) => {
+    const handleDelete = (key, imgKey) => {
         firebase.database().ref(dbref).child(`Notes/${key}`)
             .remove()
             .then(() => {
-                toast.success("Data Removed", {
+                toast.success("Notes Removed", {
                     autoClose: 900,
                     position: "top-right",
                     closeButton: false
@@ -29,6 +29,20 @@ const Note = ({ Notekey, data }) => {
             })
             .catch(error => {
                 console.log(error)
+            })
+        firebase.storage().ref(dbref).child(`images/${imgKey}`)
+            .delete()
+            .then(() => {
+                toast.success("Image Deleted",
+                    {
+                        autoClose: 500,
+                        closeButton: false,
+                        position: "top-right"
+                    }
+                )
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 
@@ -43,19 +57,16 @@ const Note = ({ Notekey, data }) => {
             key: imgName
         })
         setIsUpdate(true)
+        console.log(imgName)
         navigate('/addnote')
 
     }
-    const handleNaigate = (data, imgName) => {
+    const handleNavigate = (data) => {
         dispatch({
             type: VIEW_NOTE,
             payload: data
         })
-        dispatch({
-            type: UPDATE_IMAGE,
-            key: imgName
-        })
-        console.log(imgName)
+
         navigate('/note')
     }
 
@@ -71,7 +82,7 @@ const Note = ({ Notekey, data }) => {
                     <span><AiFillTag size={20} /> {data?.tag}</span>
                     <p className="card-text">{data?.desc.substr(0, 10)}...</p>
                     <span>Add On: {data?.date}</span>
-                    <button onClick={() => handleNaigate(data)} className='btn btn-primary m-2'>Read Full Note</button>
+                    <button onClick={() => handleNavigate(data)} className='btn btn-primary m-2'>Read Full Note</button>
                     <div className="buttons">
                         <AiFillDelete onClick={() => handleDelete(Notekey, data?.imageName)} size={28} color='red' />
                         <FaPen onClick={() => handleUpdate(data, Notekey, data?.imageName)} size={24} />
