@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 
 const Note = ({ Notekey, data }) => {
     let navigate = useNavigate()
-    const { dbref, dispatch, setIsUpdate } = useContext(NotesContext)
+    const { dbref, dispatch, setIsUpdate, darkMode } = useContext(NotesContext)
 
     // creating delete method
     const handleDelete = (key, imgKey) => {
@@ -73,9 +73,9 @@ const Note = ({ Notekey, data }) => {
 
     return (
         <div>
-            <div id='card' key={Notekey} >
-                <div className='card-img'>
-                    <img className='i' src={data?.downloadUrl} alt="" />
+            <div id='card' key={Notekey} style={darkMode} >
+                <div className='cardImg'>
+                    <img className='im' src={data?.downloadUrl} alt="" />
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">{data?.title}</h5>

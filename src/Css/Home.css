@@ -4,9 +4,18 @@
 }
 .container {
   margin-top: 2rem;
-  border: 2px solid black;
   padding: 1rem;
   width: 55%;
+  border-radius: 4rem;
+  box-shadow: 0 0 1rem rgb(36, 36, 36);
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: auto;
+    margin: auto;
+    margin-top: 1rem;
+  }
 }
 li {
   margin: 0.35rem;

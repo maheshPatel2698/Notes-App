@@ -11,12 +11,13 @@ import { v4 } from 'uuid'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import { UPDATE_IMAGE, UPDATE_NOTE } from '../Reducer/action.type'
+import { Image } from 'react-bootstrap'
 import { readAndCompressImage } from "browser-image-resizer/src/index"
 import Spinner from "react-bootstrap/Spinner"
 const AddNote = () => {
 
     // getting ref
-    const { dbref, user, state, isUpdate, setIsUpdate, dispatch, navigate } = useContext(NotesCotext)
+    const { dbref, user, state, isUpdate, setIsUpdate, dispatch, navigate, darkMode } = useContext(NotesCotext)
     const { NoteToUpdateKey, NoteToUpdate, ImageToUpdateKey } = state
 
     // creting state for input
@@ -177,11 +178,11 @@ const AddNote = () => {
     else {
         return (
             <div className='main-container'>
-                <form id='form' onSubmit={handleSubmit} >
+                <form style={darkMode} id='form' onSubmit={handleSubmit} >
                     <label htmlFor="image">Upload Image Here</label>
                     {isUploading ? <Spinner className="m-2" animation="border" variant="primary" /> : null}
                     <div>
-                        <img className='imgclass' src={downloadUrl} alt="" />
+                        <Image src={downloadUrl} roundedCircle className='i' />
                     </div>
                     <input
                         type="file"

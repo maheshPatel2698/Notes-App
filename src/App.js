@@ -74,8 +74,7 @@ const App = () => {
   }
   // creating state for db ref
   const [dbref, setDbref] = useState(checkPrevref())
-  // state for darkmode
-  const [darkMode, setDarkMode] = useState('light')
+
 
   // creting method to check perv ref
 
@@ -85,6 +84,20 @@ const App = () => {
   // creating reducer for initial state
   const [state, dispatch] = useReducer(NotesReducer, initailState)
 
+  const [darkMode, setDarkMode] = useState({
+    backgroundColor: "#BB86FC",
+    bodyDark: {
+      transition: "all 0.5s",
+      backgroundColor: "white"
+    }
+  })
+
+  // const [bodyDark, setBodyDark] = useState({
+
+  //   backgroundColor: "rgb(68, 68, 68)"
+  // })
+
+  const [isDark, setIsDark] = useState(false)
   // creating method to handle login
   const app = firebase.initializeApp(firebaseconfig)
   const auth = getAuth(app)
@@ -110,7 +123,8 @@ const App = () => {
         toast.success('Login Successfull',
           {
             autoClose: 500,
-            position: "top-right"
+            position: "top-right",
+            closeButton: false
           })
       }).catch((error) => {
         console.log(error)
@@ -127,10 +141,38 @@ const App = () => {
         position: "top-right"
       })
   }
-  const handleUsercard = () => {
-    const element = document.getElementById('userCard')
-    element.classList.toggle('userCardTransition')
+  const handleDarkMode = () => {
+
+    if (isDark) {
+      localStorage.setItem('val', false)
+      setIsDark(false)
+      setDarkMode({
+        transition: "all 0.4s",
+        backgroundColor: "#BB86FC",
+        color: "#121212",
+        bodyDark: {
+          transition: "all 0.5s",
+          backgroundColor: "rgb(68, 68, 68)"
+        }
+      })
+
+
+    }
+    else {
+      setIsDark(true)
+      setDarkMode({
+        transition: "all 0.4s",
+        backgroundColor: "white",
+        bodyDark: {
+          transition: "all 0.5s",
+          backgroundColor: "white"
+        }
+      })
+
+
+    }
   }
+
 
   const getAllNotes = () => {
     try {
@@ -156,61 +198,39 @@ const App = () => {
   }, [dbref])
 
 
-  const handleDarkMode = () => {
-    if (darkMode === "dark") {
-      setDarkMode('light')
-      const bodyEle = document.getElementById('body')
-      bodyEle.style.transition = "all 0.55s"
-      document.body.style.backgroundColor = "#121212"
-      document.body.style.color = "#FFFFFF"
-      const navEle = document.getElementById('nav')
-      navEle.style.backgroundColor = "#BB86FC"
-      navEle.style.color = "#O3DAC6"
-      const ucard = document.getElementById('userCard')
-      ucard.style.backgroundColor = "#BB86FC"
-      ucard.style.color = "#O3DAC6"
-    }
-    else {
-      setDarkMode('dark')
-      document.body.style.backgroundColor = "white"
-      document.body.style.color = "black"
-      const navEle = document.getElementById('nav')
-      navEle.style.backgroundColor = "whitesmoke"
-      navEle.style.color = "black"
-      const ucard = document.getElementById('userCard')
-      ucard.style.backgroundColor = "white"
-      ucard.style.color = "#121212"
-    }
-  }
+
 
   return (
-    <NotesCotext.Provider
-      value={{
-        user,
-        setUser,
-        state,
-        dispatch,
-        handleLogin,
-        handleLogOut,
-        handleUsercard,
-        dbref,
-        isUpdate,
-        setIsUpdate,
-        handleDarkMode,
-        navigate
-      }}
-    >
-      <NavBar />
+    <div style={darkMode.bodyDark}>
+      <NotesCotext.Provider
+        value={{
+          user,
+          setUser,
+          state,
+          dispatch,
+          handleLogin,
+          handleLogOut,
+          dbref,
+          isUpdate,
+          setIsUpdate,
+          navigate,
+          darkMode,
 
-      <ToastContainer />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/notes' element={<Notes />} />
-        <Route path='/note' element={<ViewSingleNote />} />
-        <Route path='addnote' element={<AddNote />} />
-        <Route path='/notes' element={<Notes />} />
-      </Routes>
-    </NotesCotext.Provider>
+          handleDarkMode
+        }}
+      >
+        <NavBar />
+        <ToastContainer />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/notes' element={<Notes />} />
+          <Route path='/note' element={<ViewSingleNote />} />
+          <Route path='addnote' element={<AddNote />} />
+          <Route path='/notes' element={<Notes />} />
+        </Routes>
+      </NotesCotext.Provider>
+    </div>
+
   )
 }
 
