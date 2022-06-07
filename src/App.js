@@ -34,7 +34,7 @@ import NotesReducer from './Reducer/NoteReducer'
 // importing firebase 
 import firebase from "firebase/compat/app"
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import firebaseconfig from "./Config/firebaseconfig"
+import firebaseConfig from "./Config/firebaseconfig"
 import "firebase/compat/database"
 
 const App = () => {
@@ -92,7 +92,7 @@ const App = () => {
   const [isDark, setIsDark] = useState(false)
 
   // creating method to handle login
-  const app = firebase.initializeApp(firebaseconfig)
+  const app = firebase.initializeApp(firebaseConfig)
   const auth = getAuth(app)
   const provider = new GoogleAuthProvider()
 
