@@ -1,23 +1,45 @@
 import React, { useState, useContext, useEffect } from 'react'
+// importing css 
 import "../Css/AddNote.css"
 
 // importing firebase
 import firebase from "firebase/compat/app"
 import "firebase/compat/database"
 import "firebase/compat/storage"
+
+// importing imageconfig
 import imageConfig from '../Utils/imageConfig'
+
+// importing notes context
 import NotesCotext from '../Context/NotesContext'
+
+// importing uuid to provide random id
 import { v4 } from 'uuid'
+
+// importing toast to provide toast messages
 import { toast } from 'react-toastify'
+
+// importing naviagate to proect route
 import { Navigate } from 'react-router-dom'
+
+// importing actions 
 import { UPDATE_IMAGE, UPDATE_NOTE } from '../Reducer/action.type'
+
+// importing image component from react-bootstrap
 import { Image } from 'react-bootstrap'
+
+// importing image resizer to resize iamge
 import { readAndCompressImage } from "browser-image-resizer/src/index"
+
+// importing spinner to show spinner component
 import Spinner from "react-bootstrap/Spinner"
+
 const AddNote = () => {
 
-    // getting ref
+    // getting all the data 
     const { dbref, user, state, isUpdate, setIsUpdate, dispatch, navigate, darkMode } = useContext(NotesCotext)
+
+    // destructuring from satte
     const { NoteToUpdateKey, NoteToUpdate, ImageToUpdateKey } = state
 
     // creting state for input
@@ -90,7 +112,7 @@ const AddNote = () => {
         }
     }
 
-    // creting notes under ref of user email   
+    // creting notes under ref of user name   
     const addNotes = () => {
         if (!title || !desc || !tag || !downloadUrl || !imageName) {
             return toast.warning("Please fill all fields",
@@ -127,6 +149,8 @@ const AddNote = () => {
             toast.error(error, { autoClose: 500, position: "top-right" })
         }
     }
+
+    // using useEffect to set input fields to according to data available
     useEffect(() => {
         if (NoteToUpdate) {
             setTitle(NoteToUpdate.title)

@@ -113,8 +113,3 @@
 .a {
   transform: rotateY(180deg);
 }
-@media (max-width: 400px) {
-  #userCard {
-    border: 2px solid yellow;
-  }
-}

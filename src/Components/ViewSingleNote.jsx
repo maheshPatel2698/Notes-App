@@ -1,8 +1,17 @@
 import React, { useContext } from 'react'
+
+// importing css
 import "../Css/ViewSingleNote.css"
+
+// importing context 
 import NotesContext from '../Context/NotesContext'
+
+// importing icons
 import { AiFillTag } from "react-icons/ai"
+
 const ViewSinglenote = () => {
+
+    // getting all data from context
     const { state, navigate } = useContext(NotesContext)
     const { note } = state
 

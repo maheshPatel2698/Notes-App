@@ -1,11 +1,22 @@
 import React, { useContext } from 'react'
+// importing naviagte to protect routes
 import { Navigate } from 'react-router-dom'
+
+// importing context 
 import NotesContext from '../Context/NotesContext'
+
+// importing css
 import "../Css/Notes.css"
+
+// importing note component
 import Note from "./Note"
 
 const Notes = () => {
+
+    // getting all data from context
     const { user, state } = useContext(NotesContext)
+
+    // destructuring noteItem from state
     const { NoteItem } = state
     if (!user?.email) {
         return <Navigate to="/" />

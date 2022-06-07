@@ -14,19 +14,18 @@ const NotesReducer = (state, action) => {
             return {
                 ...state,
                 note: action.payload
-            }
+            };
         case UPDATE_NOTE:
             return {
                 ...state,
                 NoteToUpdate: action.payload,
                 NoteToUpdateKey: action.key
-            }
+            };
         case UPDATE_IMAGE:
             return {
                 ...state,
                 ImageToUpdateKey: action.key
-
-            }
+            };
         default:
             return state
     }

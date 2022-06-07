@@ -2,12 +2,15 @@ import React, { useContext } from 'react'
 // importing css
 import "../Css/Home.css"
 
-
+// importing icons
 import { AiFillDelete } from "react-icons/ai"
 import { FaPen } from "react-icons/fa"
+
+// importing notesContext
 import NotesContext from '../Context/NotesContext'
 
 const Home = () => {
+    // getting state from context
     const { darkMode } = useContext(NotesContext)
     return (
         <div style={darkMode} className='container'>

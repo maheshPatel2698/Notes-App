@@ -28,6 +28,7 @@ import NotesCotext from './Context/NotesContext'
 import { SET_NOTES } from "./Reducer/action.type"
 // importing notes reducer
 
+// importing notesreducer
 import NotesReducer from './Reducer/NoteReducer'
 
 // importing firebase 
@@ -39,15 +40,6 @@ import "firebase/compat/database"
 const App = () => {
   // getting navigate to another page
   let navigate = useNavigate()
-
-  // initializing state for reducer
-  const initailState = {
-    NoteItem: [],
-    note: {},
-    NoteToUpdate: null,
-    NoteToUpdateKey: null,
-    ImageToUpdateKey: null
-  }
 
   // Method to check prev user
   const checkPrevUser = () => {
@@ -75,29 +67,30 @@ const App = () => {
   // creating state for db ref
   const [dbref, setDbref] = useState(checkPrevref())
 
-
-  // creting method to check perv ref
-
   // creating state for update
   const [isUpdate, setIsUpdate] = useState(false)
+
+  // initializing state for reducer
+  const initailState = {
+    NoteItem: [],
+    note: {},
+    NoteToUpdate: null,
+    NoteToUpdateKey: null,
+    ImageToUpdateKey: null
+  }
 
   // creating reducer for initial state
   const [state, dispatch] = useReducer(NotesReducer, initailState)
 
+  // state for darkmode
   const [darkMode, setDarkMode] = useState({
-    backgroundColor: "#BB86FC",
-    bodyDark: {
-      transition: "all 0.5s",
-      backgroundColor: "white"
-    }
+    backgroundColor: "white",
+
   })
 
-  // const [bodyDark, setBodyDark] = useState({
-
-  //   backgroundColor: "rgb(68, 68, 68)"
-  // })
-
+  // checking dark mode is unable of not
   const [isDark, setIsDark] = useState(false)
+
   // creating method to handle login
   const app = firebase.initializeApp(firebaseconfig)
   const auth = getAuth(app)
@@ -141,39 +134,34 @@ const App = () => {
         position: "top-right"
       })
   }
-  const handleDarkMode = () => {
 
+  // creting method to handle Dark mode
+  const handleDarkMode = () => {
     if (isDark) {
       localStorage.setItem('val', false)
       setIsDark(false)
       setDarkMode({
-        transition: "all 0.4s",
+        transition: "all 0.7s ease",
         backgroundColor: "#BB86FC",
         color: "#121212",
-        bodyDark: {
-          transition: "all 0.5s",
-          backgroundColor: "rgb(68, 68, 68)"
-        }
+
       })
-
-
+      const bodyEle = document.getElementById('body')
+      bodyEle.classList.add('bodyDarkMode')
     }
     else {
       setIsDark(true)
       setDarkMode({
-        transition: "all 0.4s",
+        transition: "all 0.7s ease",
         backgroundColor: "white",
-        bodyDark: {
-          transition: "all 0.5s",
-          backgroundColor: "white"
-        }
+
       })
-
-
+      const bodyEle = document.getElementById('body')
+      bodyEle.classList.remove('bodyDarkMode')
     }
   }
 
-
+  // getting all notes from firebase realtime database
   const getAllNotes = () => {
     try {
       firebase.database().ref(dbref).child('Notes')
@@ -188,6 +176,7 @@ const App = () => {
       console.log(error)
     }
   }
+
   useEffect(() => {
     if (dbref === null) {
       return;
@@ -197,11 +186,8 @@ const App = () => {
     }
   }, [dbref])
 
-
-
-
   return (
-    <div style={darkMode.bodyDark}>
+    <div >
       <NotesCotext.Provider
         value={{
           user,
@@ -215,7 +201,6 @@ const App = () => {
           setIsUpdate,
           navigate,
           darkMode,
-
           handleDarkMode
         }}
       >

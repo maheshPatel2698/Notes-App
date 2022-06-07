@@ -1,19 +1,29 @@
 import React, { useContext } from 'react'
+
+// importing css
 import "../Css/Note.css"
+
+// importing icons from react-icons
 import { AiFillTag, AiFillDelete } from "react-icons/ai"
 import { FaPen } from "react-icons/fa"
+
+// importing method from action
 import { UPDATE_IMAGE, UPDATE_NOTE, VIEW_NOTE } from "../Reducer/action.type"
-import { useNavigate } from "react-router-dom"
+
+// importing context 
 import NotesContext from "../Context/NotesContext"
+
+// importing firebase 
 import firebase from "firebase/compat/app"
 import "firebase/compat/database"
+
+// importing toast to provide notifications
 import { toast } from 'react-toastify'
 
 
-
 const Note = ({ Notekey, data }) => {
-    let navigate = useNavigate()
-    const { dbref, dispatch, setIsUpdate, darkMode } = useContext(NotesContext)
+    //  getting all the data from context
+    const { dbref, dispatch, setIsUpdate, darkMode, navigate } = useContext(NotesContext)
 
     // creating delete method
     const handleDelete = (key, imgKey) => {
@@ -46,6 +56,7 @@ const Note = ({ Notekey, data }) => {
             })
     }
 
+    // creating update method to update note
     const handleUpdate = (data, Notekey, imgName) => {
         dispatch({
             type: UPDATE_NOTE,
@@ -61,12 +72,13 @@ const Note = ({ Notekey, data }) => {
         navigate('/addnote')
 
     }
+
+    // creating method to navigate
     const handleNavigate = (data) => {
         dispatch({
             type: VIEW_NOTE,
             payload: data
         })
-
         navigate('/note')
     }
 

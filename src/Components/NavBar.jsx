@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import '../Css/NavBar.css'
 
+// importing icons from react-icons
 import { FaRegLightbulb, FaUser } from "react-icons/fa"
 import { TiTick } from "react-icons/ti"
 import { BsArrowBarRight } from "react-icons/bs"
@@ -8,21 +9,20 @@ import NotesContext from "../Context/NotesContext"
 import { Image } from 'react-bootstrap'
 
 const NavBar = () => {
-
+    // getting all the data and methods from context
     const { handleLogin, user, handleLogOut, navigate, darkMode, handleDarkMode } = useContext(NotesContext)
 
     const handleAction = () => {
         user?.email ? handleLogOut() : handleLogin()
     }
+
+    // method to provide effect to user card
     const handleUsercard = () => {
         const element = document.getElementById('userCard')
         element.classList.toggle('userCardTransition')
-
-
     }
 
-
-
+    // method to provide effect to navcard
     const handleNavCard = () => {
         const navEle = document.getElementById('navCard')
         navEle.classList.toggle("navCardTransition")
@@ -45,13 +45,13 @@ const NavBar = () => {
                 <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span>
                 <FaRegLightbulb onClick={handleDarkMode} size={32} />
             </div>
-            <div id='userCard' className='userCard'>
+            <div style={darkMode} id='userCard' className='userCard'>
                 <span>User Name: {user?.name} </span>
                 <span>User Email: {user?.email} </span>
                 <span>Verified: {user?.varifiedEmail ? <TiTick size={20} color='green' /> : ""} </span>
                 <span>Last Login: {user?.lastlogin}</span>
             </div>
-            <div id='navCard' className="navCard">
+            <div style={darkMode} id='navCard' className="navCard">
                 <span onClick={() => navigate('/notes')} >Notes</span>
                 <span onClick={() => navigate('/addnote')} >All Notes</span>
                 <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span>
