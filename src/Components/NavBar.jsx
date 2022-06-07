@@ -53,7 +53,7 @@ const NavBar = () => {
             </div>
             <div style={darkMode} id='navCard' className="navCard">
                 <span onClick={() => navigate('/notes')} >Notes</span>
-                <span onClick={() => navigate('/addnote')} >All Notes</span>
+                <span onClick={() => navigate('/addnote')} >Add Notes</span>
                 <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span>
                 {user?.email ? <Image onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />}
                 <FaRegLightbulb onClick={handleDarkMode} size={32} />
