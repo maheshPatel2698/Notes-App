@@ -8,14 +8,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 45rem;
+  width: 100%;
   margin: auto;
   box-shadow: 0 0 1rem rgb(36, 36, 36);
   margin-top: 1rem;
 }
 .img-Class {
-  width: 25rem;
-  height: 20rem;
+  width: auto;
+  height: auto;
 }
 .i-vsn {
   width: 100%;
