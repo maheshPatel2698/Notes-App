@@ -3,8 +3,9 @@ import '../Css/NavBar.css'
 
 // importing icons from react-icons
 import { FaRegLightbulb, FaUser } from "react-icons/fa"
-import { TiTick } from "react-icons/ti"
-import { BsArrowBarRight } from "react-icons/bs"
+import { GiHamburgerMenu } from "react-icons/gi"
+
+// importing context
 import NotesContext from "../Context/NotesContext"
 import { Image } from 'react-bootstrap'
 
@@ -22,43 +23,25 @@ const NavBar = () => {
         element.classList.toggle('userCardTransition')
     }
 
-    // method to provide effect to navcard
-    const handleNavCard = () => {
-        const navEle = document.getElementById('navCard')
-        navEle.classList.toggle("navCardTransition")
-        const ele2 = document.getElementById('arrow')
-        ele2.classList.toggle('a')
-    }
-    return (
-        <div style={darkMode} className="nav-bar">
-            <div className="left">
-                <span onClick={() => navigate('/')}>Notes App</span>
-                <BsArrowBarRight onClick={handleNavCard} id='arrow' size={25} />
-            </div>
-            <div className="mid">
-                <span onClick={() => navigate('/notes')}  > Notes</span>
-                <span onClick={() => navigate('/addnote')} >Add Notes</span>
-            </div>
-            <div className="right">
-                {user?.email ? <Image onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />}
 
-                <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span>
-                <FaRegLightbulb onClick={handleDarkMode} size={32} />
+    return (
+
+        <nav style={darkMode} className="navbar navbar-expand-lg ">
+            <span onClick={() => navigate('/')} className="navbar-brand">Notes App</span>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"><GiHamburgerMenu size={25} /></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div className="navbar-nav">
+                    <span onClick={() => navigate('/notes')} className="nav-item  active" >Notes<span className="sr-only">(current)</span></span>
+                    <span onClick={() => navigate('/addnote')} className="nav-item  active" >Add Note<span className="sr-only">(current)</span></span>
+                    <span className="nav-item" > <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span> </span>
+                    <span className="nav-item " > {user?.email ? <Image onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />} </span>
+                    <span className='nav-item '><FaRegLightbulb onClick={handleDarkMode} size={32} /></span>
+
+                </div>
             </div>
-            <div style={darkMode} id='userCard' className='userCard'>
-                <span>User Name: {user?.name} </span>
-                <span>User Email: {user?.email} </span>
-                <span>Verified: {user?.varifiedEmail ? <TiTick size={20} color='green' /> : ""} </span>
-                <span>Last Login: {user?.lastlogin}</span>
-            </div>
-            <div style={darkMode} id='navCard' className="navCard">
-                <span onClick={() => navigate('/notes')} >Notes</span>
-                <span onClick={() => navigate('/addnote')} >Add Notes</span>
-                <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span>
-                {user?.email ? <Image onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />}
-                <FaRegLightbulb onClick={handleDarkMode} size={32} />
-            </div>
-        </div>
+        </nav>
     )
 }
 

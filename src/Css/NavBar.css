@@ -1,115 +1,17 @@
-* {
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-}
-.nav-bar {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  box-shadow: 0 0 1rem rgb(36, 36, 36);
-  cursor: pointer;
-  height: auto;
-}
-#arrow {
-  transition: all 0.85s;
-  display: none;
-}
-.left {
-  display: flex;
-  justify-content: center;
-  margin: 0.35rem;
-  align-items: center;
-}
-.mid {
+.navbar-nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0.35rem;
 }
-.right {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0.35rem;
-}
+
 .i {
-  width: 3.7rem;
-  height: 3.7rem;
+  width: 3rem;
+  height: 3rem;
 }
-.userCard {
-  position: absolute;
-  top: 70px;
-  right: 0px;
-  width: 15rem;
-  height: auto;
-  background-color: whitesmoke;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  padding: 1rem;
-  transition: all 0.85s;
-  transform: translateY(-15rem);
-  opacity: 0;
-  z-index: 1;
+span a {
+  color: black;
+  text-decoration: none;
 }
-
-.userCard span {
-  margin: 0.2rem;
-}
-.userCardTransition {
-  transform: translateY(0rem);
-  opacity: 1;
-}
-.navCard {
-  position: absolute;
-  background-color: whitesmoke;
-  top: 3.5rem;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 1rem;
-  transition: all 0.85s;
-  transform: translateX(-100%);
-  z-index: 1;
-}
-.navCard span {
-  margin: 0.5rem;
-}
-.navCardTransition {
-  transform: translateX(0rem);
-}
-@media (max-width: 600px) {
-  .nav-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #arrow {
-    display: block;
-    margin: 0.55rem;
-  }
-  .left {
-    width: 100%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .left span {
-    margin: 0.55rem;
-  }
-  .mid {
-    display: none;
-  }
-  .right {
-    display: none;
-  }
-}
-
-.a {
-  transform: rotateY(180deg);
+.navbar-nav span {
+  margin: 0.75rem;
 }
