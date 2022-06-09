@@ -131,19 +131,20 @@ const App = () => {
     toast.success('Logout Successfull',
       {
         autoClose: 500,
-        position: "top-right"
+        position: "top-right",
+        closeButton: false
       })
   }
 
   // creting method to handle Dark mode
   const handleDarkMode = () => {
     if (isDark) {
-      localStorage.setItem('val', false)
+
       setIsDark(false)
       setDarkMode({
         transition: "all 0.7s ease",
         backgroundColor: "#BB86FC",
-        color: "#121212",
+        color: "#2F2519",
 
       })
       const bodyEle = document.getElementById('body')

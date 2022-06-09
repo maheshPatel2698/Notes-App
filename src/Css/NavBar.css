@@ -1,7 +1,11 @@
+* {
+  font-family: "Kanit", sans-serif;
+}
 .navbar-nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 
 .i {
@@ -13,5 +17,5 @@ span a {
   text-decoration: none;
 }
 .navbar-nav span {
-  margin: 0.75rem;
+  margin: 0.5rem;
 }

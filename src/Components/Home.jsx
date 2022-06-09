@@ -6,6 +6,7 @@ import "../Css/Home.css"
 import { AiFillDelete } from "react-icons/ai"
 import { FaPen } from "react-icons/fa"
 
+
 // importing notesContext
 import NotesContext from '../Context/NotesContext'
 
