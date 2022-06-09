@@ -36,7 +36,7 @@ const NavBar = () => {
                     <span onClick={() => navigate('/notes')} className="nav-item  active" >Notes<span className="sr-only">(current)</span></span>
                     <span onClick={() => navigate('/addnote')} className="nav-item  active" >Add Note<span className="sr-only">(current)</span></span>
                     <span className="nav-item" > <span onClick={handleAction}>{user?.email ? "Log out" : "Log In"}</span> </span>
-                    <span className="nav-item " > {user?.email ? <Image onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />} </span>
+                    <span className="nav-item " > {user?.email ? <Image loading='lazy' onClick={handleUsercard} className='i' fluid src={user?.photo} roundedCircle /> : <FaUser size={25} />} </span>
                     <span className='nav-item '><FaRegLightbulb onClick={handleDarkMode} size={32} /></span>
 
                 </div>

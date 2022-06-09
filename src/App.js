@@ -159,6 +159,7 @@ const App = () => {
       })
       const bodyEle = document.getElementById('body')
       bodyEle.classList.remove('bodyDarkMode')
+
     }
   }
 

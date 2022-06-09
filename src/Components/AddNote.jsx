@@ -206,7 +206,7 @@ const AddNote = () => {
                     <label htmlFor="image">Upload Image Here</label>
                     {isUploading ? <Spinner className="m-2" animation="border" variant="primary" /> : null}
                     <div>
-                        <Image src={downloadUrl} roundedCircle className='i' />
+                        <Image loading='lazy' src={downloadUrl} roundedCircle className='i' />
                     </div>
                     <input
                         type="file"

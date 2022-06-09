@@ -87,7 +87,7 @@ const Note = ({ Notekey, data }) => {
         <div>
             <div id='card' key={Notekey} style={darkMode} >
                 <div className='cardImg'>
-                    <img className='im' src={data?.downloadUrl} alt="" />
+                    <img loading='lazy' className='im' src={data?.downloadUrl} alt="" />
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">{data?.title}</h5>
