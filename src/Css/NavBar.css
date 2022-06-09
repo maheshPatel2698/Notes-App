@@ -7,6 +7,9 @@
   align-items: center;
   cursor: pointer;
 }
+.navbar {
+  box-shadow: 0 0 1rem rgb(36, 36, 36);
+}
 
 .i {
   width: 3rem;
