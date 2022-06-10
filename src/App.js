@@ -138,7 +138,6 @@ const App = () => {
   // creting method to handle Dark mode
   const handleDarkMode = () => {
     if (isDark) {
-
       setDarkMode({
         transition: "all 0.7s ease",
         backgroundColor: "#BB86FC",
@@ -152,8 +151,6 @@ const App = () => {
     else {
       setDarkMode({
         transition: "all 0.7s ease",
-
-
       })
       setIsDark(true)
       const bodyEle = document.getElementById('body')
