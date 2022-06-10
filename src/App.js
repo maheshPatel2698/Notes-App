@@ -21,6 +21,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 // importing react-router-dom
 import { Routes, Route, useNavigate } from "react-router-dom"
 
+
+
 // importing notescontext
 import NotesCotext from './Context/NotesContext'
 
@@ -83,13 +85,10 @@ const App = () => {
   const [state, dispatch] = useReducer(NotesReducer, initailState)
 
   // state for darkmode
-  const [darkMode, setDarkMode] = useState({
-    backgroundColor: "white",
-
-  })
+  const [darkMode, setDarkMode] = useState({})
 
   // checking dark mode is unable of not
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   // creating method to handle login
   const app = firebase.initializeApp(firebaseConfig)
@@ -140,23 +139,23 @@ const App = () => {
   const handleDarkMode = () => {
     if (isDark) {
 
-      setIsDark(false)
       setDarkMode({
         transition: "all 0.7s ease",
         backgroundColor: "#BB86FC",
         color: "#2F2519",
 
       })
+      setIsDark(false)
       const bodyEle = document.getElementById('body')
       bodyEle.classList.add('bodyDarkMode')
     }
     else {
-      setIsDark(true)
       setDarkMode({
         transition: "all 0.7s ease",
-        backgroundColor: "white",
+
 
       })
+      setIsDark(true)
       const bodyEle = document.getElementById('body')
       bodyEle.classList.remove('bodyDarkMode')
 
@@ -188,6 +187,7 @@ const App = () => {
     }
   }, [dbref])
 
+
   return (
     <div >
       <NotesCotext.Provider
@@ -206,6 +206,7 @@ const App = () => {
           handleDarkMode
         }}
       >
+
         <NavBar />
         <ToastContainer />
         <Routes>
