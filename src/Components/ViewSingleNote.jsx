@@ -19,9 +19,9 @@ const ViewSinglenote = () => {
 
     return (
         <div className='vsn'>
-            <div className='img-Class'>
-                <Image className='i-vsn' loading='lazy' src={note.downloadUrl} alt="" />
-            </div>
+
+            <Image className='i-vsn' loading='lazy' src={note.downloadUrl} alt="" />
+
             <h1 className='mt-2'>{note.title}</h1>
             <h3><AiFillTag size={28} />  {note?.tag}</h3>
             <div className="para">
