@@ -9,6 +9,8 @@ import NotesContext from '../Context/NotesContext'
 // importing icons
 import { AiFillTag } from "react-icons/ai"
 
+// import image component
+import { Image } from 'react-bootstrap'
 const ViewSinglenote = () => {
 
     // getting all data from context
@@ -18,7 +20,7 @@ const ViewSinglenote = () => {
     return (
         <div className='vsn'>
             <div className='img-Class'>
-                <img className='i-vsn' loading='lazy' src={note.downloadUrl} alt="" />
+                <Image className='i-vsn' loading='lazy' src={note.downloadUrl} alt="" />
             </div>
             <h1 className='mt-2'>{note.title}</h1>
             <h3><AiFillTag size={28} />  {note?.tag}</h3>
