@@ -1,7 +1,7 @@
 const imageConfig = {
-    qualty: 1.5,
-    maxWidth: 800,
-    maxHeight: 600,
+    qualty: 2.5,
+    maxWidth: 900,
+    maxHeight: 700,
     autoRotate: true,
     debug: false
 };
